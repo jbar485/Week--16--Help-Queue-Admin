@@ -61,7 +61,8 @@
 .flip-card-back {
   font-size: 40px;
   font-family: fantasy;
-  background-color: transparent;
-  color: black;
   transform: rotateY(180deg);
+  background: -webkit-linear-gradient(blue, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
