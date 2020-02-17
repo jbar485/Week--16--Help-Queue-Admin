@@ -1,22 +1,41 @@
 import React from 'react';
 import Header from './Header';
 import TicketList from './TicketList';
-import { Switch, Route } from 'react-router-dom';
+import NewTicketControl from './NewTicketControl';
 import NewTicketForm from './NewTicketForm';
+import Error404 from './Error404';
+import { Switch, Route } from 'react-router-dom';
 import seahawks from '../assets/images/seahawks.png';
 import './App.css';
 
-function App(){
-  return (
-    <div>
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      masterTicketList: []
+    };
+    this.handleAddingNewTicketToList = this.handleAddingNewTicketToList.bind(this);
+  }
+
+  handleAddingNewTicketToList(newTicket){
+    var newMasterTicketList = this.state.masterTicketList.slice();
+    newMasterTicketList.push(newTicket);
+    this.setState({masterTicketList: newMasterTicketList});
+  }
+  render(){
+    return (
+      <div>
       <Header/>
       <Switch>
-        <Route exact path='/' component={TicketList} />
-        <Route path='/newticket' component={NewTicketForm} />
+      <Route exact path='/' render={()=><TicketList ticketList={this.state.masterTicketList} />} />
+      <Route path='/newticket' render={()=><NewTicketControl onNewTicketCreation={this.handleAddingNewTicketToList} />} />
+      <Route component={Error404} />
       </Switch>
       <img src={seahawks}/>
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 export default App;
