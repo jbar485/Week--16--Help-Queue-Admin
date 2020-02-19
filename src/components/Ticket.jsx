@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Moment from 'moment';
 import './Ticket.css'
 
 function Ticket(props){
@@ -8,6 +9,7 @@ function Ticket(props){
       <div className='flip-card-inner'>
         <div className='flip-card-front'>
           <h3>{props.location}</h3>
+          <p>{props.formattedWaitTime} ago</p>
         </div>
         <div className='flip-card-back'>
           <h3>{props.names}</h3>
@@ -21,7 +23,8 @@ function Ticket(props){
 Ticket.propTypes = {
   names: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
-  issue: PropTypes.string
+  issue: PropTypes.string,
+  formattedWaitTime: PropTypes.string.isRequired
 };
 
 export default Ticket;
